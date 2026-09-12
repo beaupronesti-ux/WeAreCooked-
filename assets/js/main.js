@@ -91,7 +91,70 @@
       });
 
       document.body.classList.add('has-custom-cursor');
+
+      document.addEventListener('pointerdown', function (e) {
+        if (e.pointerType && e.pointerType !== 'mouse') return;
+        var sparkCount = 6;
+        for (var i = 0; i < sparkCount; i++) {
+          var spark = document.createElement('span');
+          spark.className = 'cursor-spark';
+          var angle = (Math.PI * 2 * i) / sparkCount + Math.random() * 0.6;
+          var distance = 24 + Math.random() * 22;
+          spark.style.setProperty('--sx', (Math.cos(angle) * distance) + 'px');
+          spark.style.setProperty('--sy', (Math.sin(angle) * distance) + 'px');
+          spark.style.left = e.clientX + 'px';
+          spark.style.top = e.clientY + 'px';
+          document.body.appendChild(spark);
+          spark.addEventListener('animationend', function () { this.remove(); });
+        }
+      });
     }
+  }
+
+  /* ========================================================================
+     Kitchen Takeovers ticket — pointer-tracked 3D tilt + glare
+     ==================================================================== */
+  var ticketEl = document.querySelector('.ticket');
+  if (ticketEl && hasFinePointer && !prefersReducedMotion) {
+    var ticketRect = null;
+    ticketEl.addEventListener('pointerenter', function () {
+      ticketRect = ticketEl.getBoundingClientRect();
+    });
+    ticketEl.addEventListener('pointermove', function (e) {
+      if (!ticketRect) ticketRect = ticketEl.getBoundingClientRect();
+      var px = (e.clientX - ticketRect.left) / ticketRect.width;
+      var py = (e.clientY - ticketRect.top) / ticketRect.height;
+      var rotateY = (px - 0.5) * 6;
+      var rotateX = (0.5 - py) * 5;
+      ticketEl.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+      ticketEl.style.setProperty('--glare-x', (px * 100) + '%');
+      ticketEl.style.setProperty('--glare-y', (py * 100) + '%');
+    });
+    ticketEl.addEventListener('pointerleave', function () {
+      ticketEl.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+    });
+  }
+
+  /* ========================================================================
+     Hero — subtle parallax on scroll
+     ==================================================================== */
+  var heroEmbers = document.querySelector('.hero-embers');
+  var heroVignette = document.querySelector('.hero-vignette');
+  if ((heroEmbers || heroVignette) && !prefersReducedMotion) {
+    var parallaxTicking = false;
+    function applyHeroParallax() {
+      parallaxTicking = false;
+      var y = window.scrollY;
+      if (y > window.innerHeight) return;
+      if (heroEmbers) heroEmbers.style.transform = 'translateY(' + (y * 0.18) + 'px)';
+      if (heroVignette) heroVignette.style.transform = 'translateY(' + (y * 0.1) + 'px)';
+    }
+    window.addEventListener('scroll', function () {
+      if (!parallaxTicking) {
+        parallaxTicking = true;
+        window.requestAnimationFrame(applyHeroParallax);
+      }
+    }, { passive: true });
   }
 
   /* ========================================================================
