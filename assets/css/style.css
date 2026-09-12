@@ -465,6 +465,44 @@ button { font-family: inherit; }
 }
 
 /* ==========================================================================
+   Line-art icons
+   ========================================================================== */
+.line-icon { width: 56px; height: 56px; color: var(--cream); flex: none; }
+.line-icon-lg { width: 84px; height: 84px; margin-bottom: var(--space-2); }
+
+/* ==========================================================================
+   Statement posters
+   ========================================================================== */
+.poster-section { padding-block: var(--space-5); }
+.poster-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); }
+.poster-card {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--space-3); text-align: center; aspect-ratio: 3 / 4;
+  padding: var(--space-4); background: var(--ink-3); border: 1px solid var(--cream-faint);
+}
+/* Specificity must beat the shared .reveal rule's transition shorthand
+   (same 1-class specificity, defined later in the file) or the hover
+   transition and border-color animation get silently dropped. transform
+   is shared between the scroll-reveal and the hover lift, so it settles
+   on one duration (.4s) that works for both. */
+.poster-card.reveal { transition: opacity .8s var(--ease), transform .4s var(--ease), border-color .3s var(--ease); }
+.poster-card:hover { transform: translateY(-4px); border-color: rgba(249, 222, 186, .4); }
+.poster-card:nth-child(2) { transition-delay: .08s; }
+.poster-card:nth-child(3) { transition-delay: .16s; }
+.poster-text {
+  font-family: var(--font-statement); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(20px, 2.6vw, 30px); line-height: 1.08; color: var(--cream); margin: 0;
+}
+.poster-card-pop { background: var(--ember); border-color: var(--ember); }
+.poster-card-pop .line-icon { color: var(--ink); }
+.poster-card-pop .poster-text { color: var(--ink); }
+
+@media (max-width: 720px) {
+  .poster-grid { grid-template-columns: 1fr; }
+  .poster-card { aspect-ratio: auto; padding: var(--space-4) var(--space-3); }
+}
+
+/* ==========================================================================
    Split sections (Studio)
    ========================================================================== */
 .split-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-5); align-items: center; }
