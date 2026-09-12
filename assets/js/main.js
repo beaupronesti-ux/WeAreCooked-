@@ -30,6 +30,34 @@
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ========================================================================
+     Palette toggle — dark (default) / light, persisted per visitor
+     ==================================================================== */
+  var themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    var THEME_KEY = 'wac-theme';
+    function applyTheme(theme) {
+      if (theme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeToggle.setAttribute('aria-pressed', 'true');
+        themeToggle.setAttribute('aria-label', 'Switch to dark palette');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        themeToggle.setAttribute('aria-pressed', 'false');
+        themeToggle.setAttribute('aria-label', 'Switch to light palette');
+      }
+    }
+    var savedTheme = null;
+    try { savedTheme = window.localStorage.getItem(THEME_KEY); } catch (err) { /* storage unavailable */ }
+    applyTheme(savedTheme === 'light' ? 'light' : 'dark');
+
+    themeToggle.addEventListener('click', function () {
+      var next = themeToggle.getAttribute('aria-pressed') === 'true' ? 'dark' : 'light';
+      applyTheme(next);
+      try { window.localStorage.setItem(THEME_KEY, next); } catch (err) { /* storage unavailable */ }
+    });
+  }
+
+  /* ========================================================================
      Custom cursor — fine-pointer desktop only, never leaves the visitor
      without a visible cursor (native stays until this is fully working)
      ==================================================================== */
