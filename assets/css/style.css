@@ -13,7 +13,7 @@
 
   --font-display: 'Prata', Georgia, serif;
   --font-body: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-statement: 'Bricolage Grotesque', 'Archivo', sans-serif;
+  --font-statement: 'Archivo', system-ui, sans-serif;
 
   --wrap: 1180px;
   --space-1: 8px;
@@ -282,7 +282,7 @@ body.has-custom-cursor .cursor-dot, body.has-custom-cursor .cursor-ring { opacit
 
 .hero-statement {
   margin: 0 0 var(--space-4);
-  font-family: var(--font-statement); font-weight: 800; text-transform: uppercase;
+  font-family: var(--font-statement); font-weight: 700; text-transform: uppercase;
   font-size: clamp(30px, 6vw, 60px); line-height: 1.08; letter-spacing: -.01em;
   color: var(--cream);
 }
