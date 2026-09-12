@@ -13,7 +13,7 @@
 
   --font-display: 'Prata', Georgia, serif;
   --font-body: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-statement: 'Anton', 'Archivo', sans-serif;
+  --font-statement: 'Bricolage Grotesque', 'Archivo', sans-serif;
 
   --wrap: 1180px;
   --space-1: 8px;
@@ -257,8 +257,8 @@ button { font-family: inherit; }
 
 .hero-statement {
   margin: 0 0 var(--space-4);
-  font-family: var(--font-statement); font-weight: 400; text-transform: uppercase;
-  font-size: clamp(32px, 6.6vw, 66px); line-height: 1.04; letter-spacing: .01em;
+  font-family: var(--font-statement); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(30px, 6vw, 60px); line-height: 1.08; letter-spacing: -.01em;
   color: var(--cream);
 }
 .hero-statement span { color: var(--ember); }
@@ -290,7 +290,7 @@ button { font-family: inherit; }
 }
 .marquee:hover .marquee-track { animation-play-state: paused; }
 .marquee-track span {
-  font-family: var(--font-statement); font-weight: 400; text-transform: uppercase;
+  font-family: var(--font-statement); font-weight: 700; text-transform: uppercase;
   font-size: clamp(20px, 3.2vw, 36px); line-height: 1; color: var(--ink);
   white-space: nowrap; display: flex; align-items: center; gap: 40px;
 }
@@ -302,7 +302,7 @@ button { font-family: inherit; }
   .marquee-track { display: none; }
   .marquee-static {
     display: block; text-align: center; margin: 0; padding-inline: var(--space-3);
-    font-family: var(--font-statement); font-size: clamp(18px, 3vw, 28px);
+    font-family: var(--font-statement); font-weight: 700; font-size: clamp(18px, 3vw, 28px);
     text-transform: uppercase; color: var(--ink); line-height: 1.3;
   }
 }
