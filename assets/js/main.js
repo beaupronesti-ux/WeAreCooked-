@@ -35,33 +35,25 @@
      ==================================================================== */
   var hasFinePointer = window.matchMedia('(pointer: fine)').matches;
   if (hasFinePointer && !prefersReducedMotion) {
-    var cursorDot = document.getElementById('cursorDot');
-    var cursorRing = document.getElementById('cursorRing');
-    if (cursorDot && cursorRing) {
-      var ringX = 0, ringY = 0, targetX = 0, targetY = 0;
+    var cursorFlame = document.getElementById('cursorFlame');
+    if (cursorFlame) {
+      var flameX = 0, flameY = 0, targetX = 0, targetY = 0;
       document.addEventListener('mousemove', function (e) {
         targetX = e.clientX; targetY = e.clientY;
-        cursorDot.style.transform = 'translate3d(' + targetX + 'px,' + targetY + 'px,0) translate(-50%,-50%)';
       });
       (function raf() {
-        ringX += (targetX - ringX) * 0.18;
-        ringY += (targetY - ringY) * 0.18;
-        cursorRing.style.transform = 'translate3d(' + ringX + 'px,' + ringY + 'px,0) translate(-50%,-50%)';
+        flameX += (targetX - flameX) * 0.35;
+        flameY += (targetY - flameY) * 0.35;
+        cursorFlame.style.transform = 'translate3d(' + flameX + 'px,' + flameY + 'px,0) translate(-50%,-50%)';
         window.requestAnimationFrame(raf);
       })();
 
       var HOVER_SELECTOR = 'a, button, [role="button"], input, .btn, .pass-dots button';
       document.addEventListener('mouseover', function (e) {
-        if (e.target.closest(HOVER_SELECTOR)) {
-          cursorRing.classList.add('is-hovering');
-          cursorDot.classList.add('is-hovering');
-        }
+        if (e.target.closest(HOVER_SELECTOR)) cursorFlame.classList.add('is-hovering');
       });
       document.addEventListener('mouseout', function (e) {
-        if (e.target.closest(HOVER_SELECTOR)) {
-          cursorRing.classList.remove('is-hovering');
-          cursorDot.classList.remove('is-hovering');
-        }
+        if (e.target.closest(HOVER_SELECTOR)) cursorFlame.classList.remove('is-hovering');
       });
       document.addEventListener('mouseleave', function () {
         document.body.classList.remove('has-custom-cursor');
