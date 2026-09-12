@@ -16,7 +16,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Prata&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -32,8 +32,8 @@
     </a>
 
     <nav class="primary-nav" id="primaryNav" aria-label="Primary">
-      <a href="#pass">Menu</a>
       <a href="#takeovers">Takeovers</a>
+      <a href="#pass">Menu</a>
       <a href="#private">Private Events</a>
       <a href="#studio">Studio</a>
       <a href="https://instagram.com/wearecooked__" target="_blank" rel="noopener">Instagram</a>
@@ -51,8 +51,8 @@
 <!-- ============ MOBILE NAV ============ -->
 <div class="mobile-nav" id="mobileNav" aria-hidden="true">
   <nav aria-label="Mobile">
-    <a href="#pass">Menu</a>
     <a href="#takeovers">Takeovers</a>
+    <a href="#pass">Menu</a>
     <a href="#private">Private Events</a>
     <a href="#studio">Studio</a>
     <a href="https://instagram.com/wearecooked__" target="_blank" rel="noopener">Instagram</a>
@@ -72,25 +72,90 @@
     <div class="hero-vignette" aria-hidden="true"></div>
 
     <div class="hero-inner reveal">
-      <div class="sign">
-        <div class="sign-glow" aria-hidden="true"></div>
-        <div class="sign-box">
-          <h1 class="sign-text">
-            <img src="assets/img/logo-hero.svg" alt="We Are Cooked">
-          </h1>
-        </div>
-      </div>
-      <p class="hero-kicker">Roaming kitchen&nbsp;&middot;&nbsp;Sydney</p>
+      <p class="hero-eyebrow">Roaming kitchen&nbsp;&middot;&nbsp;Sydney</p>
+      <h1 class="hero-mark">
+        <img src="assets/img/logo-hero.svg" alt="We Are Cooked">
+      </h1>
+      <p class="hero-statement">Different kitchen.<br><span>Same fire.</span></p>
 
       <div class="hero-cta">
-        <a href="#takeovers" class="btn btn-secondary">See upcoming takeovers</a>
-        <button class="btn btn-primary" type="button" data-open-reserve data-event="general">Reserve a seat</button>
+        <a href="#takeovers" class="btn btn-primary">See upcoming takeovers</a>
+        <button class="btn btn-secondary" type="button" data-open-reserve data-event="general">Reserve a seat</button>
       </div>
     </div>
 
-    <a class="scroll-cue" href="#manifesto" aria-label="Scroll to learn more">
+    <a class="scroll-cue" href="#takeovers" aria-label="Scroll to upcoming takeovers">
       <span></span>
     </a>
+  </section>
+
+  <!-- ============ KITCHEN TAKEOVERS ============ -->
+  <section class="section section-alt" id="takeovers">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Two nights at PS40</p>
+          <h2>Kitchen Takeovers</h2>
+        </div>
+      </div>
+
+      <div class="ticket reveal">
+        <div class="ticket-perf" aria-hidden="true"></div>
+
+        <div class="ticket-main">
+          <div class="ticket-top">
+            <h3 class="ticket-dates">17<span class="ticket-plus">+</span>24 <em>November</em></h3>
+            <p class="ticket-venue">PS40 &middot; 40 King St, Sydney NSW 2000</p>
+          </div>
+
+          <div class="ticket-nights">
+            <div class="ticket-night">
+              <h4>Monday 17 November</h4>
+              <div class="seating-row">
+                <span class="seating-time">6:00&ndash;8:00pm</span>
+                <span class="seating-label">First seating &middot; 40 seats</span>
+                <button class="btn btn-secondary" type="button" data-open-reserve data-event="nov17-early" data-event-label="Kitchen Takeover — Mon 17 Nov, First Seating 6:00–8:00pm">Reserve</button>
+              </div>
+              <div class="seating-row">
+                <span class="seating-time">8:30&ndash;10:30pm</span>
+                <span class="seating-label">Second seating &middot; 40 seats</span>
+                <button class="btn btn-secondary" type="button" data-open-reserve data-event="nov17-late" data-event-label="Kitchen Takeover — Mon 17 Nov, Second Seating 8:30–10:30pm">Reserve</button>
+              </div>
+            </div>
+
+            <div class="ticket-night">
+              <h4>Monday 24 November</h4>
+              <div class="seating-row">
+                <span class="seating-time">6:00&ndash;8:00pm</span>
+                <span class="seating-label">First seating &middot; 40 seats</span>
+                <button class="btn btn-secondary" type="button" data-open-reserve data-event="nov24-early" data-event-label="Kitchen Takeover — Mon 24 Nov, First Seating 6:00–8:00pm">Reserve</button>
+              </div>
+              <div class="seating-row">
+                <span class="seating-time">8:30&ndash;10:30pm</span>
+                <span class="seating-label">Second seating &middot; 40 seats</span>
+                <button class="btn btn-secondary" type="button" data-open-reserve data-event="nov24-late" data-event-label="Kitchen Takeover — Mon 24 Nov, Second Seating 8:30–10:30pm">Reserve</button>
+              </div>
+            </div>
+          </div>
+
+          <p class="ticket-tagline">One menu, two nights. 80 covers a night. Different kitchen. Same fire.</p>
+        </div>
+
+        <div class="ticket-cta">
+          <div class="ticket-cta-col">
+            <span class="cta-label">Reserve a seat</span>
+            <button type="button" class="cta-link" data-open-reserve data-event="general">wearecooked.com.au</button>
+          </div>
+          <div class="ticket-cta-divider" aria-hidden="true"></div>
+          <div class="ticket-cta-col">
+            <span class="cta-label">Private bookings</span>
+            <a class="cta-link" href="mailto:werecookedevents@gmail.com">werecookedevents@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="event-more reveal">More dates are added as soon as they're locked in. <a href="#footer-signup" class="link-arrow">Join the list to hear first &rarr;</a></p>
+    </div>
   </section>
 
   <!-- ============ MANIFESTO STRIP ============ -->
@@ -120,55 +185,6 @@
           <p class="pass-note">Never the same menu twice</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ============ KITCHEN TAKEOVERS ============ -->
-  <section class="section section-alt" id="takeovers">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <h2>Kitchen Takeovers</h2>
-        <span class="section-head-meta">Tickets via Acuity</span>
-      </div>
-
-      <ul class="event-list reveal">
-        <li class="event-row event-featured">
-          <div class="event-date">
-            <span class="event-day">Mon</span>
-            <span class="event-num">17</span>
-            <span class="event-month">Nov</span>
-          </div>
-          <div class="event-info">
-            <h3>Kitchen Takeover &mdash; Showcase Pop-Up</h3>
-            <p>PS40 Bar, Sydney</p>
-          </div>
-          <div class="event-action">
-            <span class="event-tag">Doors TBC</span>
-            <button class="btn btn-secondary" type="button" data-open-reserve data-event="nov-17" data-event-label="Kitchen Takeover — Mon 17 Nov, PS40 Bar">Reserve</button>
-          </div>
-        </li>
-
-        <li class="event-row event-featured">
-          <div class="event-date">
-            <span class="event-day">Mon</span>
-            <span class="event-num">24</span>
-            <span class="event-month">Nov</span>
-          </div>
-          <div class="event-info">
-            <h3>Kitchen Takeover &mdash; Showcase Pop-Up</h3>
-            <p>PS40 Bar, Sydney</p>
-          </div>
-          <div class="event-action">
-            <span class="event-tag">Doors TBC</span>
-            <button class="btn btn-secondary" type="button" data-open-reserve data-event="nov-24" data-event-label="Kitchen Takeover — Mon 24 Nov, PS40 Bar">Reserve</button>
-          </div>
-        </li>
-
-        <li class="event-row event-more">
-          <p>More dates are added as soon as they're locked in.</p>
-          <a href="#footer-signup" class="link-arrow">Join the list to hear first &rarr;</a>
-        </li>
-      </ul>
     </div>
   </section>
 

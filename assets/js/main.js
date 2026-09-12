@@ -15,8 +15,10 @@
     // booking form instead of the general scheduler. Leave empty to always
     // open the general scheduler.
     ACUITY_APPOINTMENT_TYPES: {
-      // 'nov-17': 12345678,
-      // 'nov-24': 12345678,
+      // 'nov17-early': 12345678,
+      // 'nov17-late': 12345678,
+      // 'nov24-early': 12345678,
+      // 'nov24-late': 12345678,
     }
   };
 
