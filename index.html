@@ -16,7 +16,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Prata&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Anton&family=Prata&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -71,14 +71,14 @@
     </div>
     <div class="hero-vignette" aria-hidden="true"></div>
 
-    <div class="hero-inner reveal">
-      <p class="hero-eyebrow">Roaming kitchen&nbsp;&middot;&nbsp;Sydney</p>
-      <h1 class="hero-mark">
+    <div class="hero-inner">
+      <p class="hero-eyebrow hero-in hero-in-1">Roaming kitchen&nbsp;&middot;&nbsp;Sydney</p>
+      <h1 class="hero-mark hero-in hero-in-2">
         <img src="assets/img/logo-hero.svg" alt="We Are Cooked">
       </h1>
-      <p class="hero-statement">Different kitchen.<br><span>Same fire.</span></p>
+      <p class="hero-statement hero-in hero-in-3">Different kitchen.<br><span>Same fire.</span></p>
 
-      <div class="hero-cta">
+      <div class="hero-cta hero-in hero-in-4">
         <a href="#takeovers" class="btn btn-primary">See upcoming takeovers</a>
         <button class="btn btn-secondary" type="button" data-open-reserve data-event="general">Reserve a seat</button>
       </div>
@@ -158,9 +158,14 @@
     </div>
   </section>
 
-  <!-- ============ MANIFESTO STRIP ============ -->
-  <section class="manifesto" id="manifesto">
-    <p class="reveal">No permanent address. No permanent menu.<br class="br-mobile"> We cook where we can, serve what we love.<br class="br-mobile"> Different kitchen. Same fire.</p>
+  <!-- ============ MANIFESTO MARQUEE ============ -->
+  <section class="marquee" id="manifesto" aria-label="Brand statement">
+    <p class="visually-hidden">No permanent address. No permanent menu. We cook where we can, serve what we love. Different kitchen. Same fire.</p>
+    <div class="marquee-track" aria-hidden="true">
+      <span>No permanent address.</span><span>No permanent menu.</span><span>Different kitchen.</span><span>Same fire.</span>
+      <span>No permanent address.</span><span>No permanent menu.</span><span>Different kitchen.</span><span>Same fire.</span>
+    </div>
+    <p class="marquee-static" aria-hidden="true">No permanent address. No permanent menu. Different kitchen. Same fire.</p>
   </section>
 
   <!-- ============ ON THE PASS ============ -->
@@ -256,7 +261,7 @@
       <button class="modal-close" type="button" id="reserveClose" aria-label="Close">&times;</button>
     </div>
     <div class="modal-body" id="reserveBody">
-      <!-- Acuity iframe injected here on open, or fallback message if not configured -->
+      <!-- Fallback reserve-by-email message shown until Humanitix links are configured -->
     </div>
   </div>
 </div>

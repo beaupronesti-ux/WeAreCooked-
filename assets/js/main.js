@@ -5,20 +5,25 @@
      CONFIG — fill these in to go live
      ==================================================================== */
   var CONFIG = {
-    // Your Acuity Scheduling owner ID. Find it in Acuity under
-    // Business Settings → Integrations → API, or it's the "owner=" value
-    // in your existing booking page URL (app.acuityscheduling.com/schedule.php?owner=XXXXXXX).
-    ACUITY_OWNER_ID: '',
-
-    // Optional: map an event id (see data-event on Reserve buttons) to an
-    // Acuity appointment type ID, so each event opens straight to its own
-    // booking form instead of the general scheduler. Leave empty to always
-    // open the general scheduler.
-    ACUITY_APPOINTMENT_TYPES: {
-      // 'nov17-early': 12345678,
-      // 'nov17-late': 12345678,
-      // 'nov24-early': 12345678,
-      // 'nov24-late': 12345678,
+    // Map each Reserve button's data-event id to its public Humanitix event
+    // URL (from the Humanitix dashboard once each session is published —
+    // Share → Copy link, or the event's own page URL). 'general' is used by
+    // the ticket's "wearecooked.com.au" CTA — point it at a Humanitix
+    // Collection if you group all four sessions into one.
+    //
+    // A Reserve button opens its URL directly in a new tab the moment it's
+    // set here — no extra wiring needed. Until then it falls back to a
+    // reserve-by-email flow so booking never dead-ends. (Humanitix also
+    // offers a fancier "popup checkout" embed snippet from each event's
+    // Design & Styling → Embedded Widgets page, which keeps the visitor on
+    // this site instead of opening a new tab — ask for that snippet once
+    // events are live and we can upgrade to it.)
+    HUMANITIX_EVENTS: {
+      // 'nov17-early': 'https://events.humanitix.com/...',
+      // 'nov17-late': 'https://events.humanitix.com/...',
+      // 'nov24-early': 'https://events.humanitix.com/...',
+      // 'nov24-late': 'https://events.humanitix.com/...',
+      // 'general': 'https://events.humanitix.com/...',
     }
   };
 
@@ -157,7 +162,7 @@
   }
 
   /* ========================================================================
-     Reserve modal + Acuity embed
+     Reserve — Humanitix link-out, with an email fallback modal
      ==================================================================== */
   var backdrop = document.getElementById('reserveBackdrop');
   var modal = document.getElementById('reserveModal');
@@ -166,43 +171,23 @@
   var modalClose = document.getElementById('reserveClose');
   var lastFocusedEl = null;
 
-  function acuityUrl(eventId) {
-    var base = 'https://app.acuityscheduling.com/schedule.php?owner=' + encodeURIComponent(CONFIG.ACUITY_OWNER_ID);
-    var apptType = CONFIG.ACUITY_APPOINTMENT_TYPES[eventId];
-    return apptType ? base + '&appointmentType=' + encodeURIComponent(apptType) : base;
-  }
-
-  function buildModalBody(eventId) {
-    if (!CONFIG.ACUITY_OWNER_ID) {
-      modalBody.innerHTML =
-        '<div class="modal-fallback">' +
-          '<p>Online booking is being connected right now. In the meantime, email us and we’ll lock in your seat by hand.</p>' +
-          '<a class="btn btn-primary" href="mailto:werecookedevents@gmail.com?subject=Reservation%20request">Email to reserve</a>' +
-        '</div>';
-      return;
-    }
-    var iframe = document.createElement('iframe');
-    iframe.title = 'Schedule Appointment';
-    iframe.src = acuityUrl(eventId);
-    modalBody.innerHTML = '';
-    modalBody.appendChild(iframe);
-
-    if (!document.getElementById('acuity-embed-script')) {
-      var script = document.createElement('script');
-      script.id = 'acuity-embed-script';
-      script.src = 'https://embed.acuityscheduling.com/js/embed.js';
-      script.type = 'text/javascript';
-      document.body.appendChild(script);
-    }
-  }
-
   function openReserveModal(trigger) {
     lastFocusedEl = trigger || document.activeElement;
     var eventId = trigger ? trigger.getAttribute('data-event') : 'general';
     var eventLabel = trigger ? trigger.getAttribute('data-event-label') : null;
-    modalSub.textContent = eventLabel || 'Choose a date to get started';
 
-    buildModalBody(eventId);
+    var humanitixUrl = CONFIG.HUMANITIX_EVENTS[eventId];
+    if (humanitixUrl) {
+      window.open(humanitixUrl, '_blank', 'noopener');
+      return;
+    }
+
+    modalSub.textContent = eventLabel || 'Choose a date to get started';
+    modalBody.innerHTML =
+      '<div class="modal-fallback">' +
+        '<p>Ticketing via Humanitix is being finalised. In the meantime, email us and we’ll lock in your seat by hand.</p>' +
+        '<a class="btn btn-primary" href="mailto:werecookedevents@gmail.com?subject=Reservation%20request">Email to reserve</a>' +
+      '</div>';
 
     backdrop.hidden = false;
     document.body.style.overflow = 'hidden';
@@ -246,7 +231,7 @@
 
   /* ========================================================================
      Newsletter signup (progressive enhancement — wire to a real provider
-     such as Mailchimp/Klaviyo/Acuity forms when ready; for now it confirms
+     such as Mailchimp/Klaviyo when ready; for now it confirms
      locally and offers a mailto fallback so it never dead-ends the visitor)
      ==================================================================== */
   var signupForm = document.getElementById('signupForm');
