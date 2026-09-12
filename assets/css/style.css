@@ -237,6 +237,9 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
 }
 .primary-nav a:hover { color: var(--cream); }
 .primary-nav a:hover::after { right: 0; }
+.primary-nav a[aria-current="page"] { color: var(--ember); }
+.primary-nav a[aria-current="page"]::after { right: 0; }
+.mobile-nav a[aria-current="page"] { color: var(--ember); }
 
 .header-actions { display: flex; align-items: center; gap: var(--space-2); }
 
@@ -463,6 +466,38 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
   .section { padding: var(--space-4) 0; }
   .section h2 { font-size: clamp(26px, 7.5vw, 32px); margin-bottom: var(--space-3); }
   .section-head { margin-bottom: var(--space-3); }
+}
+
+/* ==========================================================================
+   Homepage previews — teaser cards linking out to each dedicated page
+   ========================================================================== */
+.preview-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4);
+}
+.preview-card { display: flex; flex-direction: column; }
+.preview-card .image-slot { aspect-ratio: 16/10; margin-bottom: var(--space-2); }
+.preview-card h3 { font-size: clamp(22px, 3vw, 30px); margin-bottom: var(--space-1); }
+.preview-card p { color: var(--cream-soft); font-size: 15px; line-height: 1.6; margin-bottom: var(--space-2); }
+.preview-card .link-arrow { margin-top: auto; align-self: flex-start; }
+@media (max-width: 860px) {
+  .preview-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+}
+
+/* ==========================================================================
+   Dedicated page header — used on takeovers/menu/studio/private pages
+   in place of the homepage hero
+   ========================================================================== */
+.page-header {
+  padding: calc(var(--header-h) + var(--space-5)) 0 var(--space-4);
+  border-bottom: 1px solid var(--cream-faint);
+}
+.page-header .page-back {
+  display: inline-block; margin-bottom: var(--space-3);
+}
+.page-header h1 { font-size: clamp(36px, 6vw, 60px); margin-bottom: var(--space-2); }
+.page-header .page-intro { color: var(--cream-soft); font-size: clamp(15px, 1.6vw, 17px); line-height: 1.7; max-width: 620px; }
+@media (max-width: 640px) {
+  .page-header { padding: calc(var(--header-h) + var(--space-3)) 0 var(--space-3); }
 }
 
 .image-slot {

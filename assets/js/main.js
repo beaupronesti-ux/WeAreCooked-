@@ -164,18 +164,29 @@
   var mobileReserveBar = document.getElementById('mobileReserveBar');
   var heroSection = document.getElementById('top');
   var footerSignup = document.getElementById('footer-signup');
-  if (mobileReserveBar && heroSection) {
+  if (mobileReserveBar) {
     if ('IntersectionObserver' in window) {
       var footerNear = false;
       var pastHero = false;
       function syncReserveBar() {
         mobileReserveBar.classList.toggle('is-visible', pastHero && !footerNear);
       }
-      var heroIo = new IntersectionObserver(function (entries) {
-        pastHero = !entries[0].isIntersecting;
+
+      if (heroSection) {
+        var heroIo = new IntersectionObserver(function (entries) {
+          pastHero = !entries[0].isIntersecting;
+          syncReserveBar();
+        }, { rootMargin: '-1px 0px 0px 0px', threshold: 0 });
+        heroIo.observe(heroSection);
+      } else {
+        // No hero on this page (a dedicated section page) — reveal once
+        // scrolled past the header instead.
+        window.addEventListener('scroll', function () {
+          pastHero = window.scrollY > 24;
+          syncReserveBar();
+        }, { passive: true });
         syncReserveBar();
-      }, { rootMargin: '-1px 0px 0px 0px', threshold: 0 });
-      heroIo.observe(heroSection);
+      }
 
       if (footerSignup) {
         var footerIo = new IntersectionObserver(function (entries) {
