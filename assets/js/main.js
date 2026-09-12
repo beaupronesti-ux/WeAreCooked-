@@ -30,6 +30,51 @@
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ========================================================================
+     Custom cursor — fine-pointer desktop only, never leaves the visitor
+     without a visible cursor (native stays until this is fully working)
+     ==================================================================== */
+  var hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+  if (hasFinePointer && !prefersReducedMotion) {
+    var cursorDot = document.getElementById('cursorDot');
+    var cursorRing = document.getElementById('cursorRing');
+    if (cursorDot && cursorRing) {
+      var ringX = 0, ringY = 0, targetX = 0, targetY = 0;
+      document.addEventListener('mousemove', function (e) {
+        targetX = e.clientX; targetY = e.clientY;
+        cursorDot.style.transform = 'translate3d(' + targetX + 'px,' + targetY + 'px,0) translate(-50%,-50%)';
+      });
+      (function raf() {
+        ringX += (targetX - ringX) * 0.18;
+        ringY += (targetY - ringY) * 0.18;
+        cursorRing.style.transform = 'translate3d(' + ringX + 'px,' + ringY + 'px,0) translate(-50%,-50%)';
+        window.requestAnimationFrame(raf);
+      })();
+
+      var HOVER_SELECTOR = 'a, button, [role="button"], input, .btn, .pass-dots button';
+      document.addEventListener('mouseover', function (e) {
+        if (e.target.closest(HOVER_SELECTOR)) {
+          cursorRing.classList.add('is-hovering');
+          cursorDot.classList.add('is-hovering');
+        }
+      });
+      document.addEventListener('mouseout', function (e) {
+        if (e.target.closest(HOVER_SELECTOR)) {
+          cursorRing.classList.remove('is-hovering');
+          cursorDot.classList.remove('is-hovering');
+        }
+      });
+      document.addEventListener('mouseleave', function () {
+        document.body.classList.remove('has-custom-cursor');
+      });
+      document.addEventListener('mouseenter', function () {
+        document.body.classList.add('has-custom-cursor');
+      });
+
+      document.body.classList.add('has-custom-cursor');
+    }
+  }
+
+  /* ========================================================================
      Header scroll state
      ==================================================================== */
   var header = document.getElementById('siteHeader');
