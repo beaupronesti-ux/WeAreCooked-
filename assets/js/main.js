@@ -158,12 +158,56 @@
   }
 
   /* ========================================================================
+     Mobile sticky Reserve bar — appears once past the hero, hides again
+     once the footer's own signup/CTA is in view
+     ==================================================================== */
+  var mobileReserveBar = document.getElementById('mobileReserveBar');
+  var heroSection = document.getElementById('top');
+  var footerSignup = document.getElementById('footer-signup');
+  if (mobileReserveBar && heroSection) {
+    if ('IntersectionObserver' in window) {
+      var footerNear = false;
+      var pastHero = false;
+      function syncReserveBar() {
+        mobileReserveBar.classList.toggle('is-visible', pastHero && !footerNear);
+      }
+      var heroIo = new IntersectionObserver(function (entries) {
+        pastHero = !entries[0].isIntersecting;
+        syncReserveBar();
+      }, { rootMargin: '-1px 0px 0px 0px', threshold: 0 });
+      heroIo.observe(heroSection);
+
+      if (footerSignup) {
+        var footerIo = new IntersectionObserver(function (entries) {
+          footerNear = entries[0].isIntersecting;
+          syncReserveBar();
+        }, { threshold: 0 });
+        footerIo.observe(footerSignup);
+      }
+    } else {
+      mobileReserveBar.classList.add('is-visible');
+    }
+  }
+
+  /* ========================================================================
      Header scroll state
      ==================================================================== */
   var header = document.getElementById('siteHeader');
+  var lastScrollY = window.scrollY;
   function onScroll() {
-    if (window.scrollY > 24) header.classList.add('is-scrolled');
+    var y = window.scrollY;
+    if (y > 24) header.classList.add('is-scrolled');
     else header.classList.remove('is-scrolled');
+
+    var navOpen = mobileNav && mobileNav.classList.contains('is-open');
+    if (navOpen || y < header.offsetHeight) {
+      header.classList.remove('is-hidden');
+    } else if (y > lastScrollY) {
+      header.classList.add('is-hidden');
+    } else if (y < lastScrollY) {
+      header.classList.remove('is-hidden');
+    }
+    lastScrollY = y;
   }
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });

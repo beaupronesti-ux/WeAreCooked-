@@ -204,11 +204,15 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
 .site-header {
   position: fixed; inset: 0 0 auto 0; z-index: 200;
   background: linear-gradient(to bottom, color-mix(in srgb, var(--ink) 55%, transparent), transparent);
-  transition: background-color .3s var(--ease), border-color .3s var(--ease), backdrop-filter .3s var(--ease);
+  transition: background-color .3s var(--ease), border-color .3s var(--ease), backdrop-filter .3s var(--ease), transform .3s var(--ease);
+}
+@media (max-width: 640px) {
+  .site-header.is-hidden { transform: translateY(-100%); }
 }
 .site-header.is-scrolled {
-  background: color-mix(in srgb, var(--ink) 86%, transparent);
+  background: color-mix(in srgb, var(--ink) 97%, transparent);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--cream-faint);
 }
 .header-row {
@@ -402,6 +406,7 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
 @media (max-width: 640px) { .scroll-cue { display: none; } }
 
 @media (max-width: 640px) {
+  .hero { min-height: 82svh; min-height: 82vh; }
   .hero-inner { padding: var(--space-3) var(--space-2); }
   .hero-eyebrow { margin-bottom: var(--space-2); }
   .hero-mark { margin-bottom: var(--space-3); }
@@ -470,6 +475,11 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
 .image-slot span {
   font-size: 11px; letter-spacing: .2em; text-transform: uppercase; line-height: 1.8;
   color: color-mix(in srgb, var(--cream) 55%, transparent); padding: var(--space-2);
+}
+.image-slot-studio { aspect-ratio: 4/3; }
+@media (max-width: 640px) {
+  .pass-frame .image-slot { aspect-ratio: 4/3; }
+  .image-slot-studio { aspect-ratio: 16/9; }
 }
 
 /* ==========================================================================
@@ -667,6 +677,26 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
 .footer-bottom p { font-size: 12px; color: color-mix(in srgb, var(--cream) 45%, transparent); }
 
 @media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr; } }
+
+/* ==========================================================================
+   Mobile sticky Reserve bar
+   ========================================================================== */
+.mobile-reserve-bar {
+  display: none;
+}
+@media (max-width: 640px) {
+  .mobile-reserve-bar {
+    display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 150;
+    padding: var(--space-2) var(--space-2) calc(var(--space-2) + env(safe-area-inset-bottom));
+    background: color-mix(in srgb, var(--ink) 92%, transparent);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--cream-faint);
+    transform: translateY(100%);
+    transition: transform .3s var(--ease);
+  }
+  .mobile-reserve-bar.is-visible { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) { .mobile-reserve-bar { transition: none; } }
 
 /* ==========================================================================
    Reserve modal
