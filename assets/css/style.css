@@ -334,6 +334,14 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
 @keyframes cue-move { 0%, 100% { transform: translateY(0); opacity: 1; } 60% { transform: translateY(10px); opacity: .3; } }
 @media (max-width: 640px) { .scroll-cue { display: none; } }
 
+@media (max-width: 640px) {
+  .hero-inner { padding: var(--space-3) var(--space-2); }
+  .hero-eyebrow { margin-bottom: var(--space-2); }
+  .hero-mark { margin-bottom: var(--space-3); }
+  .hero-mark img { height: clamp(120px, 34vw, 200px); }
+  .hero-statement { margin-bottom: var(--space-3); font-size: clamp(30px, 9.5vw, 44px); }
+}
+
 /* ==========================================================================
    Manifesto marquee
    ========================================================================== */
@@ -377,6 +385,12 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
 .section-head h2 { margin-bottom: 0; }
 .section-head-meta {
   font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--cream-soft);
+}
+
+@media (max-width: 640px) {
+  .section { padding: var(--space-4) 0; }
+  .section h2 { font-size: clamp(26px, 7.5vw, 32px); margin-bottom: var(--space-3); }
+  .section-head { margin-bottom: var(--space-3); }
 }
 
 .image-slot {
@@ -512,10 +526,19 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
   .ticket { grid-template-columns: 1fr; }
   .ticket-perf { display: none; }
   .ticket-main { padding: var(--space-3); }
-  .ticket-nights { grid-template-columns: 1fr; gap: var(--space-3); }
-  .seating-row { flex-direction: column; align-items: flex-start; }
-  .seating-row .btn { align-self: stretch; }
-  .ticket-cta { flex-direction: column; align-items: flex-start; padding: var(--space-3); }
+  .ticket-top { margin-bottom: var(--space-2); }
+  .ticket-dates { font-size: clamp(34px, 13vw, 48px); }
+  .ticket-nights { grid-template-columns: 1fr; gap: var(--space-2); padding: var(--space-3) 0; }
+  .ticket-night + .ticket-night { padding-top: var(--space-3); }
+  .seating-row {
+    flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: center;
+    gap: 4px 10px; padding: var(--space-1);
+  }
+  .seating-time { flex: 0 0 auto; }
+  .seating-label { flex: 1 1 auto; }
+  .seating-row .btn { flex: 1 1 100%; margin-top: 2px; }
+  .ticket-tagline { padding-top: var(--space-2); font-size: 13px; }
+  .ticket-cta { flex-direction: column; align-items: flex-start; padding: var(--space-3); gap: var(--space-2); }
   .ticket-cta-divider { width: 100%; height: 1px; }
 }
 
