@@ -301,9 +301,9 @@
      ==================================================================== */
   var DISHES = [
     { n: 'Chicken Liver Parfait', d: 'Whipped chicken liver, burnt honey, toasted sourdough.' },
-    { n: 'Cured Catch Ceviche', d: 'Fresh catch, citrus, chilli, coconut vinaigrette.' },
+    { n: 'Angelfish Ceviche', d: 'Angelfish, citrus, chilli, coconut vinaigrette.', img: 'assets/img/dish-angelfish-ceviche.jpg' },
     { n: 'Sisig Tartlet with Calamansi', d: 'Slow cooked pork sisig, calamansi cream, garden herbs.' },
-    { n: 'Wood Fired Focaccia', d: 'Cultured butter, smoked sea salt.' }
+    { n: 'Wood Fired Focaccia', d: 'Cultured butter, smoked sea salt.', img: 'assets/img/dish-focaccia.jpg' }
   ];
 
   var dishNameEl = document.querySelector('[data-dish-name]');
@@ -331,16 +331,24 @@
     function showDish(i, userInitiated) {
       dishIndex = i;
       if (passCopyEl) passCopyEl.classList.add('is-fading');
+      if (dishSlotEl) dishSlotEl.classList.add('is-fading');
       window.setTimeout(function () {
         dishNameEl.textContent = DISHES[i].n;
         dishDescEl.textContent = DISHES[i].d;
         if (dishSlotEl) {
-          dishSlotEl.querySelector('span').innerHTML = 'Dish photography<br>' + DISHES[i].n;
+          if (DISHES[i].img) {
+            dishSlotEl.classList.add('has-photo');
+            dishSlotEl.innerHTML = '<img src="' + DISHES[i].img + '" alt="' + DISHES[i].n + '">';
+          } else {
+            dishSlotEl.classList.remove('has-photo');
+            dishSlotEl.innerHTML = '<span>Dish photography<br>' + DISHES[i].n + '</span>';
+          }
         }
         dishDotButtons.forEach(function (dot, k) {
           dot.setAttribute('aria-selected', k === i ? 'true' : 'false');
         });
         if (passCopyEl) passCopyEl.classList.remove('is-fading');
+        if (dishSlotEl) dishSlotEl.classList.remove('is-fading');
       }, passCopyEl ? 180 : 0);
       if (userInitiated) restartDishTimer();
     }

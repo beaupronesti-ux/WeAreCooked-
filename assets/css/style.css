@@ -533,6 +533,8 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
   font-size: 11px; letter-spacing: .2em; text-transform: uppercase; line-height: 1.8;
   color: color-mix(in srgb, var(--cream) 55%, transparent); padding: var(--space-2);
 }
+.image-slot.has-photo { background: none; border-style: solid; border-color: var(--cream-faint); }
+.image-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .image-slot-studio { aspect-ratio: 4/3; }
 @media (max-width: 640px) {
   .pass-frame .image-slot { aspect-ratio: 4/3; }
@@ -545,6 +547,7 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
 .pass-grid { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); gap: var(--space-5); align-items: center; }
 .pass-frame { position: relative; }
 .pass-frame .image-slot { transition: opacity .5s var(--ease); }
+.pass-frame .image-slot.is-fading { opacity: 0; }
 
 .dish-name {
   font-family: var(--font-display); font-size: clamp(28px, 4vw, 46px); line-height: 1.1;
