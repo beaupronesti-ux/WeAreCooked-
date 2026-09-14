@@ -542,6 +542,17 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
 }
 
 /* ==========================================================================
+   Studio photo gallery — masonry via CSS columns
+   ========================================================================== */
+.gallery-grid { column-count: 3; column-gap: var(--space-2); }
+.gallery-grid img {
+  display: block; width: 100%; margin-bottom: var(--space-2);
+  border-radius: var(--radius); break-inside: avoid;
+}
+@media (max-width: 860px) { .gallery-grid { column-count: 2; } }
+@media (max-width: 480px) { .gallery-grid { column-count: 1; } }
+
+/* ==========================================================================
    On the pass
    ========================================================================== */
 .pass-grid { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); gap: var(--space-5); align-items: center; }
