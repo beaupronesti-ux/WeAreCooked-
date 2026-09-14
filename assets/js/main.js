@@ -303,10 +303,7 @@
     { n: 'Chicken Liver Parfait', d: 'Whipped chicken liver, burnt honey, toasted sourdough.' },
     { n: 'Angelfish Ceviche', d: 'Angelfish, citrus, chilli, coconut vinaigrette.', img: 'assets/img/dish-angelfish-ceviche.jpg' },
     { n: 'Sisig Tartlet with Calamansi', d: 'Slow cooked pork sisig, calamansi cream, garden herbs.' },
-    { n: 'Wood Fired Focaccia', d: 'Cultured butter, smoked sea salt.' },
-    { n: 'Charred Lamb Cutlets', d: 'Grass-fed lamb, smoked chilli oil, charred lemon.', img: 'assets/img/dish-lamb-cutlets.jpg' },
-    { n: 'Honey-Glazed Pork Belly', d: 'Slow-roasted pork belly, honey glaze, charred greens.', img: 'assets/img/dish-pork-belly.jpg' },
-    { n: 'Sticky Glazed Eggplant', d: 'Charcoal eggplant, sticky soy glaze, tomato, coriander.', img: 'assets/img/dish-eggplant.jpg' }
+    { n: 'Wood Fired Focaccia', d: 'Cultured butter, smoked sea salt.' }
   ];
 
   var dishNameEl = document.querySelector('[data-dish-name]');
