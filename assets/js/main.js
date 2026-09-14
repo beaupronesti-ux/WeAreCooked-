@@ -6,28 +6,52 @@
      ==================================================================== */
   var CONFIG = {
     // Map each Reserve button's data-event id to its public Humanitix event
-    // URL (from the Humanitix dashboard once each session is published —
-    // Share → Copy link, or the event's own page URL). 'general' is used by
-    // the ticket's "wearecooked.com.au" CTA — point it at a Humanitix
-    // Collection if you group all four sessions into one.
+    // URL. Every [data-open-reserve] element with a configured id below is
+    // converted (see "Reserve triggers" further down) into a real link
+    // carrying the ?widget=popup convention Humanitix's popup.js looks for,
+    // so clicking it opens the real checkout as an on-page overlay. The
+    // link's own href is a fully-working new-tab fallback if that script
+    // ever fails to load, so booking never dead-ends. 'general' is used by
+    // every generic Reserve button (header, hero, mobile nav, sticky bar)
+    // plus the ticket's "wearecooked.com.au" CTA — point it at a Humanitix
+    // Collection if you ever want it to show all sessions instead of one.
     //
-    // A Reserve button opens its URL directly in a new tab the moment it's
-    // set here — no extra wiring needed. Until then it falls back to a
-    // reserve-by-email flow so booking never dead-ends. (Humanitix also
-    // offers a fancier "popup checkout" embed snippet from each event's
-    // Design & Styling → Embedded Widgets page, which keeps the visitor on
-    // this site instead of opening a new tab — ask for that snippet once
-    // events are live and we can upgrade to it.)
+    // Any data-event id left unconfigured here falls back to an in-page
+    // "reserve by email" modal instead, so a missing URL never breaks the
+    // button either.
     HUMANITIX_EVENTS: {
-      // 'nov17-early': 'https://events.humanitix.com/...',
-      // 'nov17-late': 'https://events.humanitix.com/...',
-      // 'nov24-early': 'https://events.humanitix.com/...',
-      // 'nov24-late': 'https://events.humanitix.com/...',
-      // 'general': 'https://events.humanitix.com/...',
+      'nov17-early': 'https://events.humanitix.com/wearecooked-x-ps40',
+      'nov17-late': 'https://events.humanitix.com/copy-of-wearecooked-x-ps40-night-one-first-seating',
+      'nov24-early': 'https://events.humanitix.com/copy-of-wearecooked-x-ps40-night-one-first-seating-fjgec8uh',
+      'nov24-late': 'https://events.humanitix.com/copy-of-wearecooked-x-ps40-night-one-second-seating',
+      'general': 'https://events.humanitix.com/wearecooked-x-ps40',
     }
   };
 
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ========================================================================
+     Reserve triggers — turn configured [data-open-reserve] buttons into
+     real Humanitix popup-widget links, before humanitix's popup.js (loaded
+     later in the page as a deferred module) runs its own scan for them.
+     ==================================================================== */
+  document.querySelectorAll('[data-open-reserve]').forEach(function (el) {
+    var eventId = el.getAttribute('data-event') || 'general';
+    var url = CONFIG.HUMANITIX_EVENTS[eventId];
+    if (!url) return; // no URL yet — stays a button; modal fallback below handles it
+
+    var popupUrl = url + (url.indexOf('?') === -1 ? '?' : '&') + 'widget=popup';
+    var link = document.createElement('a');
+    link.className = el.className;
+    link.innerHTML = el.innerHTML;
+    link.href = popupUrl;
+    link.setAttribute('data-humanitix-popup', popupUrl);
+    link.target = '_blank';
+    link.rel = 'noopener';
+    var label = el.getAttribute('data-event-label');
+    if (label) link.setAttribute('aria-label', label);
+    el.parentNode.replaceChild(link, el);
+  });
 
   /* ========================================================================
      Palette toggle — dark (default) / light, persisted per visitor
