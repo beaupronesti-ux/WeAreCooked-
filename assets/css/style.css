@@ -624,6 +624,14 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
 .ticket-dates .ticket-plus { display: inline-block; margin: 0 .15em; color: var(--cream-soft); font-size: .55em; vertical-align: middle; }
 .ticket-dates em { font-style: normal; color: var(--cream); font-size: .58em; }
 .ticket-venue { margin-top: var(--space-1); color: var(--cream-soft); font-size: 14px; letter-spacing: .02em; }
+.ticket-venue a {
+  color: inherit; text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%;
+  transition: background-size .3s var(--ease), color .3s var(--ease);
+  padding-bottom: 1px;
+}
+.ticket-venue a:hover { background-size: 100% 1px; color: var(--ember); }
 
 .ticket-nights {
   display: grid; grid-template-columns: 1fr; gap: var(--space-4);
