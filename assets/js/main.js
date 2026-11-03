@@ -300,10 +300,17 @@
      On the pass — dish carousel
      ==================================================================== */
   var DISHES = [
-    { n: 'Chicken Liver Parfait', d: 'Whipped chicken liver, burnt honey, toasted sourdough.' },
-    { n: 'Angelfish Ceviche', d: 'Angelfish, citrus, chilli, coconut vinaigrette.', img: 'assets/img/dish-angelfish-ceviche.jpg' },
-    { n: 'Sisig Tartlet with Calamansi', d: 'Slow cooked pork sisig, calamansi cream, garden herbs.' },
-    { n: 'Wood Fired Focaccia', d: 'Cultured butter, smoked sea salt.' }
+    // Course 1 — Canapés
+    { n: 'Pork & Liver Sisig', d: 'Pork, liver, kumquat.' },
+    { n: 'Coconut-Cured Angelfish', d: 'Angelfish, coconut.', img: 'assets/img/dish-angelfish-ceviche.jpg' },
+    { n: 'Garden Tomato Tart', d: 'Garden tomato.' },
+    // Course 2
+    { n: 'Pan-Seared Chicken', d: 'Pan-seared chicken, duck fat jus, charred leek oil.' },
+    { n: 'Fire-Kissed Leeks', d: 'Fire-kissed leeks, pecorino, pangrattato.' },
+    { n: 'Focaccia al Rosmarino', d: 'Olive oil, rosemary.' },
+    { n: 'Cultured Butter & Black Mint', d: 'Cultured butter, black mint.' },
+    // Course 3
+    { n: 'Olive, Strawberry & White Chocolate', d: 'Olive, strawberry, white chocolate.' }
   ];
 
   var dishNameEl = document.querySelector('[data-dish-name]');
