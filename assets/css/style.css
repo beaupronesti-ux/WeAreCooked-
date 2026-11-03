@@ -1039,3 +1039,5 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
 }
 @media (max-width: 860px) { .wall { display: block; column-count: 2; column-gap: var(--space-2); } .wall-col { display: contents; } .wall-item { margin-bottom: var(--space-2); } }
 @media (max-width: 640px) { .wall { column-gap: 10px; } .wall-item { margin-bottom: 10px; } .studio-follow { padding: var(--space-5) 0; } }
+
+.image-slot img.focus-hand { object-position: 62% 100%; }
