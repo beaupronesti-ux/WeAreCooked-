@@ -305,7 +305,7 @@
     { n: 'Coconut-Cured Angelfish', d: 'Angelfish, coconut.', img: 'assets/img/dish-angelfish-ceviche.jpg' },
     { n: 'Garden Tomato Tart', d: 'Garden tomato.' },
     // Course 2
-    { n: 'Pan-Seared Chicken', d: 'Pan-seared chicken, duck fat jus, charred leek oil.' },
+    { n: 'Pan-Seared Chicken', d: 'Pan-seared chicken, duck fat jus, charred leek oil.', img: 'assets/img/dish-pan-seared-chicken.jpg' },
     { n: 'Fire-Kissed Leeks', d: 'Fire-kissed leeks, pecorino, pangrattato.' },
     { n: 'Focaccia al Rosmarino', d: 'Cultured butter, black mint.' },
     // Course 3
