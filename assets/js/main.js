@@ -517,6 +517,19 @@
     driftUpdate();
   }
 
+  /* Instagram rail arrows */
+  var igRail = document.getElementById('igRail');
+  if (igRail) {
+    var igStep = function (dir) {
+      var card = igRail.querySelector('.ig-card');
+      igRail.scrollBy({ left: dir * (card ? card.offsetWidth + 24 : 360) });
+    };
+    var igPrev = document.getElementById('igPrev');
+    var igNext = document.getElementById('igNext');
+    if (igPrev) igPrev.addEventListener('click', function () { igStep(-1); });
+    if (igNext) igNext.addEventListener('click', function () { igStep(1); });
+  }
+
   /* ========================================================================
      Misc
      ==================================================================== */

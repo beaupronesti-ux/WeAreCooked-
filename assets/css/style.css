@@ -1045,3 +1045,24 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
   .studio-hero { padding-bottom: var(--space-5); }
 }
 @media (max-width: 640px) { .social-cta .btn { width: 100%; } .social-grid { gap: 10px; } }
+
+/* Studio — Instagram embeds rail + shoot grid */
+.ig-rail-wrap { position: relative; }
+.ig-rail {
+  display: flex; gap: var(--space-3); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: var(--space-2);
+  scrollbar-width: thin; scrollbar-color: var(--cream-faint) transparent; scroll-behavior: smooth;
+}
+.ig-card { flex: 0 0 min(86vw, 360px); scroll-snap-align: start; display: flex; flex-direction: column; gap: var(--space-1); }
+.ig-card iframe { width: 100%; height: 590px; border: 1px solid var(--cream-faint); border-radius: var(--radius); background: #fff; display: block; }
+.ig-card-link { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--cream-soft); text-decoration: none; }
+.ig-card-link:hover { color: var(--ember); }
+.ig-rail-nav { display: flex; gap: var(--space-1); margin-top: var(--space-2); }
+.ig-nav-btn {
+  width: 44px; height: 44px; border: 1px solid var(--cream-faint); background: none; color: var(--cream);
+  cursor: pointer; font-size: 18px; border-radius: 50%; transition: border-color .3s var(--ease), color .3s var(--ease);
+}
+.ig-nav-btn:hover { border-color: var(--ember); color: var(--ember); }
+@media (prefers-reduced-motion: reduce) { .ig-rail { scroll-behavior: auto; } }
+.social-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.social-grid .social-tile { margin: 0; }
+@media (max-width: 860px) { .social-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
