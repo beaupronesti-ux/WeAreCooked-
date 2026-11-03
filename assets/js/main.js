@@ -20,11 +20,8 @@
     // "reserve by email" modal instead, so a missing URL never breaks the
     // button either.
     HUMANITIX_EVENTS: {
-      'nov17-early': 'https://events.humanitix.com/wearecooked-x-ps40',
-      'nov17-late': 'https://events.humanitix.com/copy-of-wearecooked-x-ps40-night-one-first-seating',
       'nov24-early': 'https://events.humanitix.com/copy-of-wearecooked-x-ps40-night-one-first-seating-fjgec8uh',
       'nov24-late': 'https://events.humanitix.com/copy-of-wearecooked-x-ps40-night-one-second-seating',
-      'general': 'https://events.humanitix.com/wearecooked-x-ps40',
     }
   };
 
@@ -37,6 +34,15 @@
      ==================================================================== */
   document.querySelectorAll('[data-open-reserve]').forEach(function (el) {
     var eventId = el.getAttribute('data-event') || 'general';
+    if (eventId === 'general') {
+      // Generic Reserve buttons lead to the seatings, where each one has its own Humanitix link
+      var anchor = document.createElement('a');
+      anchor.className = el.className;
+      anchor.innerHTML = el.innerHTML;
+      anchor.href = 'takeovers.html#seatings';
+      el.parentNode.replaceChild(anchor, el);
+      return;
+    }
     var url = CONFIG.HUMANITIX_EVENTS[eventId];
     if (!url) return; // no URL yet — stays a button; modal fallback below handles it
 
@@ -300,20 +306,18 @@
      On the pass — dish carousel
      ==================================================================== */
   var DISHES = [
-    // Course 1 — Canapés
-    { n: 'Pork & Liver Sisig', d: 'Pork, liver, kumquat.' },
-    { n: 'Coconut-Cured Angelfish', d: 'Angelfish, coconut.', img: 'assets/img/dish-angelfish-ceviche.jpg' },
-    { n: 'Garden Tomato Tart', d: 'Garden tomato.' },
-    // Course 2
-    { n: 'Pan-Seared Chicken', d: 'Pan-seared chicken, duck fat jus, charred leek oil.', img: 'assets/img/dish-pan-seared-chicken.jpg' },
-    { n: 'Fire-Kissed Leeks', d: 'Fire-kissed leeks, pecorino, pangrattato.' },
-    { n: 'Focaccia al Rosmarino', d: 'Cultured butter, black mint.' },
-    // Course 3
-    { n: 'Olive, Strawberry & White Chocolate', d: 'Olive, strawberry, white chocolate.' }
+    { c: 'Course one \u00b7 Canap\u00e9s', n: 'Pork & Liver Sisig', d: 'Pork, liver, kumquat.', img: 'assets/img/dish-pork-liver-sisig.jpg' },
+    { c: 'Course one \u00b7 Canap\u00e9s', n: 'Coconut-Cured Angelfish', d: 'Angelfish, coconut.', img: 'assets/img/dish-angelfish-ceviche.jpg' },
+    { c: 'Course one \u00b7 Canap\u00e9s', n: 'Garden Tomato Tart', d: 'Garden tomato.', img: 'assets/img/dish-garden-tomato-tart.jpg' },
+    { c: 'Course two', n: 'Pan-Seared Chicken', d: 'Pan-seared chicken, duck fat jus, charred leek oil.', img: 'assets/img/dish-pan-seared-chicken.jpg' },
+    { c: 'Course two', n: 'Fire-Kissed Leeks', d: 'Fire-kissed leeks, pecorino, pangrattato.', img: 'assets/img/dish-fire-kissed-leeks.jpg' },
+    { c: 'Course two', n: 'Focaccia al Rosmarino', d: 'Cultured butter, black mint.', img: 'assets/img/dish-focaccia.jpg' },
+    { c: 'Course three', n: 'Olive, Strawberry & White Chocolate', d: 'Olive, strawberry, white chocolate.', img: 'assets/img/dish-olive-strawberry.jpg' }
   ];
 
   var dishNameEl = document.querySelector('[data-dish-name]');
   var dishDescEl = document.querySelector('[data-dish-desc]');
+  var dishCourseEl = document.querySelector('[data-dish-course]');
   var dishDotsEl = document.querySelector('[data-dish-dots]');
   var dishSlotEl = document.querySelector('[data-dish-slot]');
   var passCopyEl = dishNameEl ? dishNameEl.closest('.pass-copy') : null;
@@ -341,6 +345,7 @@
       window.setTimeout(function () {
         dishNameEl.textContent = DISHES[i].n;
         dishDescEl.textContent = DISHES[i].d;
+        if (dishCourseEl) dishCourseEl.textContent = DISHES[i].c;
         if (dishSlotEl) {
           if (DISHES[i].img) {
             dishSlotEl.classList.add('has-photo');
@@ -472,6 +477,23 @@
       signupForm.reset();
     });
   }
+
+  /* ========================================================================
+     Countdown to the one night — [data-countdown] elements. Counts whole
+     days to 24 Nov (Sydney time, AEDT) and flips to "tonight" / "has passed".
+     ==================================================================== */
+  var NIGHT_START = Date.parse('2026-11-24T00:00:00+11:00');
+  var DAY_MS = 86400000;
+  document.querySelectorAll('[data-countdown]').forEach(function (el) {
+    var now = Date.now();
+    var days = Math.ceil((NIGHT_START - now) / DAY_MS);
+    var text;
+    if (now >= NIGHT_START + DAY_MS) text = 'This night has passed';
+    else if (now >= NIGHT_START) text = 'Tonight';
+    else if (days === 1) text = 'Tomorrow night';
+    else text = days + ' days to go';
+    el.textContent = text;
+  });
 
   /* ========================================================================
      Misc
