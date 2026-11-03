@@ -1040,3 +1040,16 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
 @media (max-width: 860px) { .wall { display: block; column-count: 2; column-gap: var(--space-2); } .wall-col { display: contents; } .wall-item { margin-bottom: var(--space-2); } }
 @media (max-width: 640px) { .wall { column-gap: 10px; } .wall-item { margin-bottom: 10px; } .studio-follow { padding: var(--space-5) 0; } }
 
+
+/* Takeovers page — spectacle hero modifiers */
+.spectacle-page { padding-top: var(--header-h); }
+.spectacle-page .spectacle-inner { padding-top: var(--space-5); }
+.spectacle-page .page-back { display: block; width: fit-content; margin-bottom: var(--space-3); }
+.spectacle-where a { color: inherit; text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size .3s var(--ease), color .3s var(--ease); padding-bottom: 2px; }
+.spectacle-where a:hover { background-size: 100% 1px; color: var(--ember); }
+.spectacle-seatings { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-bottom: var(--space-3); }
+.spectacle-seatings span {
+  font-family: var(--font-display); font-size: clamp(16px, 1.8vw, 20px); color: var(--cream);
+  border: 1px solid color-mix(in srgb, var(--ember) 55%, transparent); border-radius: 999px; padding: 8px 18px;
+  background: color-mix(in srgb, var(--ember) 8%, transparent);
+}
