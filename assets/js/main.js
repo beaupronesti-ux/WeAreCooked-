@@ -307,8 +307,7 @@
     // Course 2
     { n: 'Pan-Seared Chicken', d: 'Pan-seared chicken, duck fat jus, charred leek oil.' },
     { n: 'Fire-Kissed Leeks', d: 'Fire-kissed leeks, pecorino, pangrattato.' },
-    { n: 'Focaccia al Rosmarino', d: 'Olive oil, rosemary.' },
-    { n: 'Cultured Butter & Black Mint', d: 'Cultured butter, black mint.' },
+    { n: 'Focaccia al Rosmarino', d: 'Cultured butter, black mint.' },
     // Course 3
     { n: 'Olive, Strawberry & White Chocolate', d: 'Olive, strawberry, white chocolate.' }
   ];
