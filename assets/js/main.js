@@ -494,6 +494,28 @@
     else text = days + ' days to go';
     el.textContent = text;
   });
+  document.querySelectorAll('[data-countdown-num]').forEach(function (el) {
+    el.textContent = Math.max(Math.ceil((NIGHT_START - Date.now()) / DAY_MS), 0);
+  });
+
+  /* Spectacle collage — photos drift at slightly different speeds on scroll */
+  var driftEls = document.querySelectorAll('.sp-photo[data-drift]');
+  if (driftEls.length && !prefersReducedMotion) {
+    var driftTicking = false;
+    var driftUpdate = function () {
+      driftTicking = false;
+      driftEls.forEach(function (el) {
+        var r = el.parentNode.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > window.innerHeight + 200) return;
+        var offset = (r.top + r.height / 2) - window.innerHeight / 2;
+        el.style.setProperty('--drift', (offset * parseFloat(el.getAttribute('data-drift'))).toFixed(1) + 'px');
+      });
+    };
+    window.addEventListener('scroll', function () {
+      if (!driftTicking) { driftTicking = true; window.requestAnimationFrame(driftUpdate); }
+    }, { passive: true });
+    driftUpdate();
+  }
 
   /* ========================================================================
      Misc
