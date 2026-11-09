@@ -306,8 +306,7 @@
      On the pass — dish carousel
      ==================================================================== */
   var DISHES = [
-    { c: 'Course one \u00b7 Canap\u00e9s', n: 'Pork & Liver Sisig', d: 'Pork, liver, kumquat.', img: 'assets/img/dish-pork-liver-sisig.jpg' },
-    { c: 'Course one \u00b7 Canap\u00e9s', n: 'Coconut-Cured Angelfish', d: 'Angelfish, coconut.', img: 'assets/img/dish-angelfish-ceviche.jpg' },
+    { c: 'Course one \u00b7 Canap\u00e9s', n: 'Coconut-Cured Snapper', d: 'Snapper, coconut.', img: 'assets/img/dish-coconut-cured-snapper.jpg' },
     { c: 'Course one \u00b7 Canap\u00e9s', n: 'Garden Tomato Tart', d: 'Garden tomato.', img: 'assets/img/dish-garden-tomato-tart.jpg' },
     { c: 'Course two', n: 'Pan-Seared Chicken', d: 'Pan-seared chicken, duck fat jus, charred leek oil.', img: 'assets/img/dish-pan-seared-chicken.jpg' },
     { c: 'Course two', n: 'Fire-Kissed Leeks', d: 'Fire-kissed leeks, pecorino, pangrattato.', img: 'assets/img/dish-fire-kissed-leeks.jpg' },
