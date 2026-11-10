@@ -1053,3 +1053,31 @@ body.has-custom-cursor .cursor-flame { opacity: 1; }
   border: 1px solid color-mix(in srgb, var(--ember) 55%, transparent); border-radius: 999px; padding: 8px 18px;
   background: color-mix(in srgb, var(--ember) 8%, transparent);
 }
+
+/* ==========================================================================
+   Poster design language — script accents, solid red CTA, tasting menu card
+   ========================================================================== */
+:root { --font-script: 'Nothing You Could Do', 'Segoe Script', cursive; --font-hand: 'Nanum Pen Script', 'Segoe Print', cursive; --cta: #fc2918; }
+.btn-primary { background: var(--cta); border-color: var(--cta); color: #fff; }
+.btn-primary:hover { background: var(--cream); border-color: var(--cream); color: #0d0d0c; }
+.btn-solid { background: var(--cta); border-color: var(--cta); color: #fff; font-family: var(--font-display); font-weight: 400; letter-spacing: .02em; text-transform: none; font-size: 18px; }
+.btn-solid:hover { background: var(--cream); border-color: var(--cream); color: #0d0d0c; }
+.spectacle-month, .ticket-dates em { font-family: var(--font-script); }
+.spectacle-month { font-size: clamp(34px, 4.6vw, 66px); }
+.hand { font-family: var(--font-hand); font-weight: 400; }
+
+.tasting { padding-top: var(--space-5); }
+.tasting-card { max-width: 860px; margin-inline: auto; text-align: center; background: var(--ink-3); border: 1px solid var(--cream-faint); padding: clamp(32px, 6vw, 64px) clamp(20px, 6vw, 72px); position: relative; }
+.tasting-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 40% at 50% 0%, color-mix(in srgb, var(--ember) 14%, transparent), transparent 70%); pointer-events: none; }
+.tasting-title { font-family: var(--font-display); font-size: 14px; letter-spacing: .24em; text-transform: uppercase; color: var(--ember); margin-bottom: var(--space-3); }
+.tasting-card .hand { font-size: clamp(44px, 7vw, 64px); line-height: 1; margin: var(--space-4) 0 0; color: var(--cream); }
+.tasting-card > .hand:first-of-type { margin-top: 0; }
+.tasting-choose { font-style: italic; font-size: 14px; color: var(--cream-soft); margin: 4px 0 var(--space-3); }
+.tasting-card p { font-size: clamp(15px, 1.8vw, 18px); line-height: 1.55; margin-bottom: 12px; }
+.tasting-two { display: grid; grid-template-columns: 1fr 1fr; }
+.tasting-two > div { padding: 0 var(--space-3); }
+.tasting-two > div + div { border-left: 1px solid var(--cream-faint); }
+.tasting-two h3 { font-family: var(--font-display); font-weight: 400; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--ember); margin-bottom: var(--space-2); }
+.tasting-cta { margin-top: var(--space-4); }
+.course-label-gap { margin-top: var(--space-4); }
+@media (max-width: 640px) { .tasting-two { grid-template-columns: 1fr; } .tasting-two > div { padding: 0; } .tasting-two > div + div { border-left: 0; border-top: 1px solid var(--cream-faint); padding-top: var(--space-3); margin-top: var(--space-3); } .tasting-cta { width: 100%; } }
