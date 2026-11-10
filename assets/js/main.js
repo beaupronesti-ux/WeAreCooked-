@@ -303,6 +303,90 @@
   }
 
   /* ========================================================================
+     On the pass — dish carousel
+     ==================================================================== */
+  var DISHES = [
+    { c: 'Course one \u00b7 Canap\u00e9s', n: 'Coconut-Cured Snapper', d: 'Snapper, coconut.', img: 'assets/img/dish-coconut-cured-snapper.jpg' },
+    { c: 'Course one \u00b7 Canap\u00e9s', n: 'Garden Tomato Tart', d: 'Garden tomato.', img: 'assets/img/dish-garden-tomato-tart.jpg' },
+    { c: 'Course two', n: 'Pan-Seared Chicken', d: 'Pan-seared chicken, duck fat jus, charred leek oil.', img: 'assets/img/dish-pan-seared-chicken.jpg' },
+    { c: 'Course two', n: 'Fire-Kissed Leeks', d: 'Fire-kissed leeks, pecorino, pangrattato.', img: 'assets/img/dish-fire-kissed-leeks.jpg' },
+    { c: 'Course two', n: 'Focaccia al Rosmarino', d: 'Cultured butter, black mint.', img: 'assets/img/dish-focaccia.jpg' },
+    { c: 'Course three', n: 'Olive, Strawberry & White Chocolate', d: 'Olive, strawberry, white chocolate.', img: 'assets/img/dish-olive-strawberry.jpg' }
+  ];
+
+  var dishNameEl = document.querySelector('[data-dish-name]');
+  var dishDescEl = document.querySelector('[data-dish-desc]');
+  var dishCourseEl = document.querySelector('[data-dish-course]');
+  var dishDotsEl = document.querySelector('[data-dish-dots]');
+  var dishSlotEl = document.querySelector('[data-dish-slot]');
+  var passCopyEl = dishNameEl ? dishNameEl.closest('.pass-copy') : null;
+
+  if (dishNameEl && dishDescEl && dishDotsEl) {
+    var dishIndex = 0;
+    var dishTimer = null;
+    var dishDotButtons = [];
+
+    DISHES.forEach(function (dish, i) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      dot.setAttribute('aria-label', 'Show dish ' + (i + 1) + ': ' + dish.n);
+      dot.addEventListener('click', function () { showDish(i, true); });
+      dishDotsEl.appendChild(dot);
+      dishDotButtons.push(dot);
+    });
+
+    function showDish(i, userInitiated) {
+      dishIndex = i;
+      if (passCopyEl) passCopyEl.classList.add('is-fading');
+      if (dishSlotEl) dishSlotEl.classList.add('is-fading');
+      window.setTimeout(function () {
+        dishNameEl.textContent = DISHES[i].n;
+        dishDescEl.textContent = DISHES[i].d;
+        if (dishCourseEl) dishCourseEl.textContent = DISHES[i].c;
+        if (dishSlotEl) {
+          if (DISHES[i].img) {
+            dishSlotEl.classList.add('has-photo');
+            dishSlotEl.innerHTML = '<img src="' + DISHES[i].img + '" alt="' + DISHES[i].n + '">';
+          } else {
+            dishSlotEl.classList.remove('has-photo');
+            dishSlotEl.innerHTML = '<span>Dish photography<br>' + DISHES[i].n + '</span>';
+          }
+        }
+        dishDotButtons.forEach(function (dot, k) {
+          dot.setAttribute('aria-selected', k === i ? 'true' : 'false');
+        });
+        if (passCopyEl) passCopyEl.classList.remove('is-fading');
+        if (dishSlotEl) dishSlotEl.classList.remove('is-fading');
+      }, passCopyEl ? 180 : 0);
+      if (userInitiated) restartDishTimer();
+    }
+
+    function restartDishTimer() {
+      window.clearInterval(dishTimer);
+      if (prefersReducedMotion) return;
+      dishTimer = window.setInterval(function () {
+        showDish((dishIndex + 1) % DISHES.length, false);
+      }, 4200);
+    }
+
+    showDish(0, false);
+    restartDishTimer();
+
+    var passSection = document.getElementById('pass');
+    if (passSection) {
+      passSection.addEventListener('mouseenter', function () { window.clearInterval(dishTimer); });
+      passSection.addEventListener('mouseleave', restartDishTimer);
+      passSection.addEventListener('focusin', function () { window.clearInterval(dishTimer); });
+      passSection.addEventListener('focusout', restartDishTimer);
+    }
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) window.clearInterval(dishTimer); else restartDishTimer();
+    });
+  }
+
+  /* ========================================================================
      Reserve — Humanitix link-out, with an email fallback modal
      ==================================================================== */
   var backdrop = document.getElementById('reserveBackdrop');
